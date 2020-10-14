@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdtopway.graphql.data.mapper.ResultsMapper">
+    <resultMap id="baseMap" type="Results">
+        <result column="time" property="time" />
+        <result column="hostname" property="hostname" />
+        <result column="value" property="value" />
+    </resultMap>
+
+    <sql id="commonClounm">
+        time,
+        hostname,
+        value
+    </sql>
+    <select id="findAllResults" resultMap="baseMap">
+        select
+        <include refid="commonClounm"/>
+        from results
+    </select>
+</mapper>

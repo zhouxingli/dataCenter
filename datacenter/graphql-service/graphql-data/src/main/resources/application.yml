@@ -1,0 +1,41 @@
+#mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath:com/gdtopway/graphql/data/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.gdtopway.graphql.data.entity.mysql
+
+#swagger扫描路径配置
+swagger:
+  base-packages:
+    - org.springbalde
+    - com.example
+    - com.gdtopway.graphql.data
+spring:
+  cloud:
+    nacos:
+      config:
+        shared-configs: dataDB.properties
+  datasource:
+      mysql:
+        url: ${blade.datasource.graph.mysql.url}
+        username: ${blade.datasource.graph.mysql.username}
+        password: ${blade.datasource.graph.mysql.password}
+      oracle:
+        url: ${blade.datasource.graph.oracle.url}
+        username: ${blade.datasource.graph.oracle.username}
+        password: ${blade.datasource.graph.oracle.password}
+      master:
+        url: ${blade.datasource.graph.master.url}
+        username: ${blade.datasource.graph.master.username}
+        password: ${blade.datasource.graph.master.password}
+      dawn:
+        url: ${blade.datasource.graph.dawn.url}
+        username: ${blade.datasource.graph.dawn.username}
+        password: ${blade.datasource.graph.dawn.password} 
+      slave:
+        driver-class-name: ${blade.datasource.graph.slave.driver-class-name}
+        url: ${blade.datasource.graph.slave.url}
+        username: ${blade.datasource.graph.slave.username}
+        password: ${blade.datasource.graph.slave.password}
+        druid:
+            validation-query: select 1 from dual

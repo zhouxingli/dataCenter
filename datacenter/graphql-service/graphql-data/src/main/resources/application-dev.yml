@@ -1,0 +1,60 @@
+#服务器端口
+server:
+  port: 8200
+
+#数据源配置
+spring:
+  influx:
+    url: ${blade.datasource.graph.influxdb.url}
+    user: ${blade.datasource.graph.influxdb.username}
+    password: ${blade.datasource.graph.influxdb.password}
+    database: ${blade.datasource.graph.influxdb.database}
+  #排除DruidDataSourceAutoConfigure
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  datasource:
+    dynamic:
+      primary: mysql
+      datasource:
+        master:
+          url: ${blade.datasource.graph.master.url}
+          username: ${blade.datasource.graph.master.username}
+          password: ${blade.datasource.graph.master.password}
+        mysql:
+          url: ${blade.datasource.graph.mysql.url}
+          username: ${blade.datasource.graph.mysql.username}
+          password: ${blade.datasource.graph.mysql.password}
+        dawn:
+          url: ${blade.datasource.graph.dawn.url}
+          username: ${blade.datasource.graph.dawn.username}
+          password: ${blade.datasource.graph.dawn.password}
+        slave:
+          driver-class-name: ${blade.datasource.graph.slave.driver-class-name}
+          url: ${blade.datasource.graph.slave.url}
+          username: ${blade.datasource.graph.slave.username}
+          password: ${blade.datasource.graph.slave.password}
+          druid:
+            validation-query: select 1 from dual
+        oracle:
+          driver-class-name: ${blade.datasource.graph.oracle.driver-class-name}
+          url: ${blade.datasource.graph.oracle.url}
+          username: ${blade.datasource.graph.oracle.username}
+          password: ${blade.datasource.graph.oracle.password}
+          druid:
+            validation-query: select 1 from dual
+
+
+#mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath:com/gdtopway/graphql/data/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.gdtopway.graphql.data.entity
+
+#swagger扫描路径配置
+swagger:
+  base-packages:
+    - org.springbalde
+    - com.example
+    - com.gdtopway.graphql.data
+
+

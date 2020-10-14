@@ -1,0 +1,63 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    # Author(object)
+    findAuthorById(id:Long!): Author
+    # author
+    findAllAuthors: [Author]
+    # count author number
+    countAuthors: Long!
+    # book
+    findAllBooks: [Book]
+    # book
+    findBookById(id:Long!): Book
+    countBooks: Long!
+   getIndicatorData(dataDate:String,indicatorCode:String,deptCode:String): [IndicatorData]
+}
+
+type Mutation {
+    newAuthor(firstName: String!,lastName: String!) : Author!
+    newBook(title: String!,isbn: String!,pageCount: Int, authorId: Long!) : Book!
+    saveBook(input: BookInput!) : Book!
+    deleteBook(id: ID!) : Boolean
+    updateBookPageCount(pageCount: Int!, id:Long!) : Book!
+}
+#作者
+type Author {
+    id: Long!
+    #this is createdTime
+    createdTime: String
+    firstName: String
+    lastName: String
+    books: [Book]
+}
+
+input BookInput {
+    title: String!
+    isbn: String!
+    pageCount: Int
+    authorId: Long
+}
+
+type Book {
+    id: Long!
+    title: String!
+    isbn: String!
+    pageCount: Int
+    #作者
+    author: Author
+}
+
+type IndicatorData {
+    id: Long!
+    indicatorCode: String
+    indicatorName: String
+    deptCode: String
+    deptName: String
+    autoRecordValue: String
+    handRecordValue: String
+    dataDate: String
+}
